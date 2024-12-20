@@ -1,7 +1,13 @@
+"""
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+🎄 Advent of Code 2024: Day 3 🎁
+*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
+"""
+
 import re
 
-# Get just the numbers from each mul(123,123), convert them to integers,
-# multiply, and sum them.
+# Get just the numbers from each mul(123,123) string, convert them to integers,
+# and store in a list.
 def extract_numbers(string):
     # Find numbers, convert to integers, return as a list
     return list(map(int, re.findall(r"\d{1,3}", string)))
@@ -9,14 +15,19 @@ def extract_numbers(string):
 def part_1(instructions):
     # Find all matching instances of mul(123,123) and put into a list
     matches = re.findall(r"mul\(\d{1,3},\d{1,3}\)", instructions)
+    # Extract numbers from mul(123,123)
     get_nums_as_ints = [extract_numbers(i) for i in matches]
-    print('The answer for Part 1 is ' + str(sum([i[0] * i[1] for i in get_nums_as_ints])) + '🎄.')
+    mul_sum_total = sum([i[0] * i[1] for i in get_nums_as_ints])
+    print('The answer for Part 1 is ' + str(mul_sum_total) + '🎄.')
 
 def part_2(instructions):
     # Find all mul(123,123) instances, as well as any instances of do() and don't()
     matches = re.findall(r"mul\(\d{1,3},\d{1,3}\)|do\(\)|don't\(\)", instructions)
     results = []
+    # Start with including instances of mul(123,123)
     include_flag = True
+    # Loop through each match turning the include_flag on or off with each do
+    # or don't. Store extracted, multiplied numbers in final results list.
     for i in matches:
         if i == "do()":
             include_flag = True
