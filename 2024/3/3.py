@@ -3,7 +3,6 @@
 🎄 Advent of Code 2024: Day 3 🎁
 *-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*
 """
-
 import re
 
 # Get just the numbers from each mul(123,123) string, convert them to integers,
